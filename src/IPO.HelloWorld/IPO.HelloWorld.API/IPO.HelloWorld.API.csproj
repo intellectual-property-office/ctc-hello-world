@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IPO.Common.API" Version="2.0.424491" />
+    <PackageReference Include="IPO.Configuration" Version="2.0.424214" />
+    <PackageReference Include="IPO.CTC.HealthChecks" Version="2.0.424215" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.3.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
+    <PackageReference Include="System.Runtime.Caching" Version="9.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IPO.HelloWorld.Interfaces\IPO.HelloWorld.Interfaces.csproj" />
+    <ProjectReference Include="..\IPO.HelloWorld.Models\IPO.HelloWorld.Models.csproj" />
+    <ProjectReference Include="..\IPO.HelloWorld.Services\IPO.HelloWorld.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="version">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
