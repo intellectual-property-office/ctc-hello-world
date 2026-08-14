@@ -38,6 +38,25 @@ namespace IPO.HelloWorld.UnitTests.Services
             result.Should().NotBeNull();
             result.Greeting.Should().Be(greeting);
         }
+
+        [DataRow("")]
+        [DataRow("   ")]
+        [DataRow(null)]
+        [TestMethod]
+        public void GetHelloWorldGreeting_WithNullOrEmptyGreeting_ReturnsStringEmpty(string? greeting)
+        {
+            // Arrange 
+            var settings = new Settings { Greeting = greeting! };
+            _mockServiceProvider.Setup(x => x.GetService(typeof(Settings))).Returns(settings);
+            var service = new HelloWorldManagementService(_mockServiceProvider.Object, _mocklogger.Object);
+
+            // Act
+            var result = service.GetHelloWorldGreeting();
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Greeting.Should().Be(string.Empty);
+        }
     }
 }
 
