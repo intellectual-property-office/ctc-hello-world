@@ -7,7 +7,7 @@ namespace IPO.HelloWorld.Models.API
     public class HelloWorldResult
     {
         [SwaggerSchema(Description = "Greeting to user.")]
-		[Required]
-		public required string Greeting { get; set; }
+        [Required]
+        public required string Greeting { get; set; }
     }
 }

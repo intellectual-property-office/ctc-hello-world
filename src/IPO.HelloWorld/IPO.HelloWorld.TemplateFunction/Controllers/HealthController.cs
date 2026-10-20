@@ -6,15 +6,15 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using System.Net;
 
-namespace IPO.HelloWorld.TemplateFunction
+namespace IPO.HelloWorld.TemplateFunction.Controllers
 {
-    public class Health
+    public class HealthController
     {
         #region Fields and constructors
 
         private readonly IHealthChecker _healthChecker;
 
-        public Health(IHealthChecker healthChecker)
+        public HealthController(IHealthChecker healthChecker)
         {
             _healthChecker = healthChecker;
         }

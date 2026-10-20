@@ -24,7 +24,7 @@ namespace IPO.HelloWorld.API.Controllers
         [Route("/")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HelloWorldResult))]
         [SwaggerResponseExample(StatusCodes.Status200OK, typeof(HelloWorldResultExample))]
-		public ActionResult<HelloWorldResult> HelloWorld()
+        public ActionResult<HelloWorldResult> HelloWorld()
         {
             var result = _helloWorldManagementService.GetHelloWorldGreeting();
             return Ok(result);

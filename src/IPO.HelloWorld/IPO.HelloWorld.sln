@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D1299D25
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPO.HelloWorld.UnitTests", "IPO.HelloWorld.UnitTests\IPO.HelloWorld.UnitTests.csproj", "{1545A063-E5E9-436C-A42F-8F605D78A791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPO.HelloWorld.BDDTests", "IPO.HelloWorld.BDDTests\IPO.HelloWorld.BDDTests.csproj", "{BD267674-4FA3-4CA6-8E44-4A00ED69C75D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPO.HelloWorld.ComponentTests", "IPO.HelloWorld.ComponentTests\IPO.HelloWorld.ComponentTests.csproj", "{BD267674-4FA3-4CA6-8E44-4A00ED69C75D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPO.HelloWorld.TemplateFunction", "IPO.HelloWorld.TemplateFunction\IPO.HelloWorld.TemplateFunction.csproj", "{BFF0E8E2-338A-4D73-886D-4DEE93EFE78B}"
 EndProject

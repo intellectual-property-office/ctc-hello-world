@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IPO.Common.API" Version="2.0.424491" />
+    <PackageReference Include="IPO.Common.API" Version="2.4.478770" />
     <PackageReference Include="IPO.Configuration" Version="2.0.424214" />
-    <PackageReference Include="IPO.CTC.HealthChecks" Version="2.0.424215" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.3.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
-    <PackageReference Include="System.Runtime.Caching" Version="9.0.9" />
+    <PackageReference Include="IPO.CTC.Common.Functions" Version="2.6.478771" />
+    <PackageReference Include="IPO.CTC.HealthChecks" Version="2.1.478758" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="9.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>

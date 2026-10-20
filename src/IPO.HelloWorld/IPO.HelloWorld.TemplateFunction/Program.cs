@@ -21,21 +21,24 @@ namespace IPO.HelloWorld.TemplateFunction
                     config.AddIPOAzureAppConfigWithManagedIdentity();
                     config.AddTemplateConfiguration();
                 })
-                .ConfigureServices((context, services) =>
-                {
-                    services.AddApplicationInsightsTelemetryWorkerService();
-                    services.ConfigureFunctionsApplicationInsights();
-
-                    services.Configure<Settings>(context.Configuration);
-                    services.AddSingleton(sp => sp.GetRequiredService<IOptions<Settings>>().Value);
-                    services.AddScoped<IHelloWorldManagementService, HelloWorldManagementService>();
-
-                    services.AddHealthChecks();
-                    services.AddScoped<IHealthChecker, HealthChecker>();
-                })
+                .ConfigureServices(ConfigureServices)
                 .Build();
 
             host.Run();
+        }
+
+        public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
+        {
+            services.AddApplicationInsightsTelemetryWorkerService();
+            services.ConfigureFunctionsApplicationInsights();
+
+            services.Configure<Settings>(context.Configuration);
+            services.AddSingleton(sp => sp.GetRequiredService<IOptions<Settings>>().Value);
+            services.AddScoped<IHelloWorldManagementService, HelloWorldManagementService>();
+
+            services.AddHealthChecks();
+            services.AddScoped<IHealthChecker, HealthChecker>();
+            services.AddContentVersionHeader();
         }
     }
 }

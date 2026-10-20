@@ -1,7 +1,6 @@
 ﻿using IPO.HelloWorld.Interfaces;
 using IPO.HelloWorld.Models.API;
 using IPO.HelloWorld.Models.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace IPO.HelloWorld.Services
@@ -10,10 +9,10 @@ namespace IPO.HelloWorld.Services
     {
         private readonly Settings _settings;
         private readonly ILogger<HelloWorldManagementService> _logger;
-        public HelloWorldManagementService(IServiceProvider serviceProvider,
+        public HelloWorldManagementService(Settings settings,
                                            ILogger<HelloWorldManagementService> logger)
         {
-            _settings = serviceProvider.GetService<Settings>()!;
+            _settings = settings;
             _logger = logger;
         }
 

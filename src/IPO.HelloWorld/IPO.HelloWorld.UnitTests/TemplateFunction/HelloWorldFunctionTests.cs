@@ -2,45 +2,52 @@ using AwesomeAssertions;
 using IPO.HelloWorld.Interfaces;
 using IPO.HelloWorld.Models.API;
 using IPO.HelloWorld.TemplateFunction;
+using IPO.HelloWorld.UnitTests.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
-using System.Net;
 
 namespace IPO.HelloWorld.UnitTests.TemplateFunction
 {
     [TestClass]
     public class HelloWorldFunctionTests
     {
-        private readonly Mock<IHelloWorldManagementService> _mockHelloWorldManagementService;
-        private readonly Mock<ILogger<HelloWorldFunction>> _mockLogger;
+        private Mock<IHelloWorldManagementService> _mockHelloWorldManagementService = null!;
+        private HelloWorldResult _expectedResult = null!;
+        private HelloWorldFunction _function = null!;
+        private HttpRequest _request = null!;
 
-        public HelloWorldFunctionTests()
+        [TestInitialize]
+        public void Setup()
         {
+            _expectedResult = HelloWorldTestData.CreateResult();
             _mockHelloWorldManagementService = new Mock<IHelloWorldManagementService>();
-            _mockLogger = new Mock<ILogger<HelloWorldFunction>>();
+            _mockHelloWorldManagementService
+                .Setup(s => s.GetHelloWorldGreeting())
+                .Returns(_expectedResult);
+            _function = new HelloWorldFunction(NullLogger<HelloWorldFunction>.Instance, _mockHelloWorldManagementService.Object);
+            _request = new DefaultHttpContext().Request;
         }
 
         [TestMethod]
-        public void Run_ReturnsOkObjectResult_WithGreetingFromService()
+        public void Run_ServiceReturnsGreeting_ReturnsOkWithServiceResult()
         {
-            // Arrange
-            var expectedResult = new HelloWorldResult { Greeting = "Hello World" };
-            _mockHelloWorldManagementService
-                .Setup(s => s.GetHelloWorldGreeting())
-                .Returns(expectedResult);
-
-            var function = new HelloWorldFunction(_mockLogger.Object, _mockHelloWorldManagementService.Object);
-            var httpRequest = new DefaultHttpContext().Request;
-
             // Act
-            var response = function.Run(httpRequest);
+            var response = _function.Run(_request);
 
             // Assert
             var okResult = response.Should().BeOfType<OkObjectResult>().Subject;
-            okResult.StatusCode.Should().Be((int)HttpStatusCode.OK);
-            okResult.Value.Should().Be(expectedResult);
+            okResult.Value.Should().BeSameAs(_expectedResult, "the function must return the service result unchanged");
+        }
+
+        [TestMethod]
+        public void Run_ServiceReturnsGreeting_CallsServiceOnce()
+        {
+            // Act
+            _function.Run(_request);
+
+            // Assert
             _mockHelloWorldManagementService.Verify(s => s.GetHelloWorldGreeting(), Times.Once);
         }
     }

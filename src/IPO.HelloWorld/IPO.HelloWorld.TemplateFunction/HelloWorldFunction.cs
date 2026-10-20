@@ -26,9 +26,8 @@ namespace IPO.HelloWorld.TemplateFunction
         [Function("HelloWorld")]
         [OpenApiOperation(operationId: "helloWorld", tags: new[] { "HelloWorld" }, Summary = "HelloWorld template GET endpoint.", Description = "A basic get endpoint to return a greeting message retrieved from configuration.")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(HelloWorldResult), Summary = "Successful response", Example = typeof(HelloWorldResultExample))]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.NotFound, contentType: "application/json", bodyType: typeof(IPOErrorResponse), Description = "Not Found")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.InternalServerError, contentType: "application/json", bodyType: typeof(IPOErrorResponse), Description = "Internal Server Error")]
-        public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "helloWorld")] HttpRequest httpReq)
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.InternalServerError, contentType: "application/json", bodyType: typeof(IPOErrorResponse), Description = "Internal Server Error", Example = typeof(InternalServerErrorExample))]
+        public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "helloworld")] HttpRequest httpReq)
         {
             var result = _helloWorldManagementService.GetHelloWorldGreeting();
             _logger.LogInformation("HelloWorld function processed a request.");

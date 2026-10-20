@@ -69,13 +69,9 @@ namespace IPO.HelloWorld.API
 
             services.AddScoped<Settings>(x => settings);
 
-            services.AddIPOErrorAwareScoped<IHelloWorldManagementService>(serviceProvider =>
-            {
-                var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
-                var logger = loggerFactory!.CreateLogger<HelloWorldManagementService>();
-
-                return new HelloWorldManagementService(serviceProvider, logger);
-            }, Error.Create<HelloWorldManagementService>("E002"));
+            services.AddIPOErrorAwareScoped<IHelloWorldManagementService>(
+                serviceProvider => ActivatorUtilities.CreateInstance<HelloWorldManagementService>(serviceProvider),
+                Error.Create<HelloWorldManagementService>("E002"));
         }
     }
 }
